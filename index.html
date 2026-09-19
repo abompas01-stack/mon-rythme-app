@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d6f2e8">
+  <meta name="description" content="Planning hebdomadaire personnel et suivi des habitudes.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>Mon rythme</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#planning" aria-label="Mon rythme, accueil"><span>✦</span> mon rythme</a>
+    <nav aria-label="Navigation principale">
+      <button class="nav-link active" data-view="planning">Planning</button>
+      <button class="nav-link" data-view="bilan">Bilan</button>
+    </nav>
+    <button id="themeButton" class="icon-button" aria-label="Changer le thème">☼</button>
+  </header>
+
+  <main>
+    <section id="planning" class="view active" aria-labelledby="planning-title">
+      <div class="intro-row">
+        <div>
+          <p class="eyebrow" id="weekLabel">SEMAINE DU</p>
+          <h1 id="planning-title">Une semaine à ton rythme.</h1>
+          <p class="subtle">Clique sur une case pour valider ta tâche. Les activités détaillées s’ajoutent juste après.</p>
+        </div>
+        <div class="week-controls">
+          <button class="round" id="previousWeek" aria-label="Semaine précédente">←</button>
+          <button class="today-button" id="todayButton">Aujourd’hui</button>
+          <button class="round" id="nextWeek" aria-label="Semaine suivante">→</button>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <div><span>Objectif de la semaine</span><strong id="weekPercent">0%</strong></div>
+        <div class="progress-track"><div id="weekProgress" class="progress-fill"></div></div>
+        <p id="weekCount">0 sur 51 actions réalisées</p>
+      </div>
+
+      <div class="table-wrap">
+        <table id="plannerTable">
+          <thead><tr><th scope="col">Habitude</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="hint">Astuce : tu peux sélectionner plusieurs activités dans une même case. Les changements sont enregistrés automatiquement.</p>
+    </section>
+
+    <section id="bilan" class="view" aria-labelledby="bilan-title">
+      <div class="intro-row compact"><div><p class="eyebrow">TES PROGRÈS</p><h1 id="bilan-title">Le bilan, semaine après semaine.</h1><p class="subtle">Les semaines passées sont conservées sur cet appareil.</p></div></div>
+      <div class="stats-grid">
+        <article class="stat-card accent"><span>Meilleure semaine</span><strong id="bestWeek">—</strong><small id="bestWeekDate">Commence ton suivi</small></article>
+        <article class="stat-card"><span>Cette semaine</span><strong id="currentScore">0%</strong><small id="currentScoreText">0 action validée</small></article>
+        <article class="stat-card"><span>Jour le plus actif</span><strong id="topDay">—</strong><small id="topDayText">Après quelques jours de suivi</small></article>
+      </div>
+      <section class="chart-card" aria-labelledby="chart-title"><div class="card-heading"><div><h2 id="chart-title">Taux de réussite hebdomadaire</h2><p>Ton objectif par semaine, sur les 51 actions prévues.</p></div></div><div id="weeklyChart" class="chart" role="img" aria-label="Graphique de réussite par semaine"></div></section>
+      <section class="rank-card" aria-labelledby="rank-title"><div class="card-heading"><div><h2 id="rank-title">Tes journées les plus actives</h2><p>Classement selon le nombre moyen d’actions validées.</p></div></div><ol id="dayRanking" class="day-ranking"></ol></section>
+    </section>
+  </main>
+
+  <dialog id="detailDialog">
+    <form method="dialog" class="dialog-content">
+      <div class="dialog-head"><div><p class="eyebrow" id="dialogDay">LUNDI</p><h2 id="dialogTitle">Sport</h2></div><button value="cancel" class="icon-button" aria-label="Fermer">×</button></div>
+      <p id="dialogExplain" class="subtle">Choisis ce que tu as fait. Tu peux en cocher plusieurs.</p>
+      <div id="choices" class="choices"></div>
+      <div class="add-choice"><input id="customChoice" type="text" maxlength="40" placeholder="Ajouter une activité…"><button type="button" id="addChoiceButton">Ajouter</button></div>
+      <div class="dialog-actions"><button type="button" id="uncheckButton" class="text-button">Retirer la croix</button><button value="confirm" class="save-button">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
